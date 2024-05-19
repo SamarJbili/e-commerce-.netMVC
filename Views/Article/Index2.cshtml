@@ -1,0 +1,42 @@
+﻿@model IEnumerable<e_commerce.Models.Article>
+@{
+    ViewData["Title"] = "Index2";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-nn3Di+qzvnn+sMpFgrvKhOPZ04P6e4+dkE//szBly4FfrYiGM9Aj2x2cQ6Hw4sptjMzuoJMwv4pFxckggHrV1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<h1>Index2</h1>
+<div class="container mt-5">
+    <a href="/Panier" class="btn btn-primary">
+        <i class="fa fa-shopping-cart"></i> Panier
+    </a>
+
+    <div class="row">
+        <div class="col">
+            <h1>Liste des articles</h1>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        @foreach (var article in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="~/images/@(article.ImagePath ?? "noimage.jpg")" class="card-img-top" alt="Image de l'article">
+                    <div class="card-body">
+                        <h5 class="card-title">@article.name</h5>
+                        <p class="card-text">@article.Description</p>
+                        <p class="card-text">Prix: @article.Prix</p>
+                        <p class="card-text">Catégorie: @article.Categorie.Nom</p>
+                    </div>
+                    <div class="card-footer">
+                        <form method="post" asp-controller="Panier" asp-action="Ajouter">
+                            <input type="hidden" name="articleId" value="@article.Id" />
+                            <button type="submit" class="btn btn-primary">Ajouter au panier</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+</div>

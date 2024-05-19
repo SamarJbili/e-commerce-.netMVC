@@ -1,0 +1,65 @@
+﻿@model IEnumerable<e_commerce.Models.LignePanier>
+
+@{
+    ViewData["Title"] = "Index";
+    // Calculate the total price of the items in the cart
+    var totalPrix = Model.Sum(item => item.Qte * (item.Article != null ? item.Article.Prix : 0));
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Index2" asp-controller="Article">Liste des Articles</a> <!-- Lien vers la liste des articles -->
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Image de l'article
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Qte)
+            </th>
+            <th>
+                Prix de l'article
+            </th>
+            <th>
+                Montant Total
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="~/images/@item.Article.ImagePath" alt="Image de l'article" style="width: 50px; height: auto;" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Qte)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Article.Prix)
+                </td>
+                <td>
+                    @* Display the total price for the line item *@
+                    @(item.Qte * item.Article.Prix)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h4>Total des prix des produits: @totalPrix</h4>
+
+
+<form method="post" asp-controller="Commande" asp-action="Ajoute">
+    
+    <button type="submit" class="btn btn-primary">Commander</button>
+</form>

@@ -1,0 +1,19 @@
+﻿@model e_commerce.Models.Commande
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirmation de commande</title>
+</head>
+<body>
+    <h2>Confirmation de commande</h2>
+    <p>Merci, votre commande a été enregistrée avec succès !</p>
+
+    <h3>Détails de la commande :</h3>
+    <ul>
+        <li>Numéro de commande : @Model.CommandeId</li>
+        <li>Date de commande : @Model.DateCommande</li>
+        <!-- Ajoutez d'autres détails de la commande ici selon vos besoins -->
+    </ul>
+</body>
+</html>

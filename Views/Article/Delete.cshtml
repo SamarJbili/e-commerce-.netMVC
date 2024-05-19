@@ -1,0 +1,15 @@
+﻿
+
+<h2>Supprimer l'article</h2>
+
+<div>
+    <h4>Êtes-vous sûr de vouloir supprimer cet article ?</h4>
+    <div>
+        <h4>Nom : @Model.name</h4>
+        <!-- Affichez d'autres propriétés de l'article si nécessaire -->
+    </div>
+    <form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+        <input type="submit" value="Supprimer" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-secondary">Annuler</a>
+    </form>
+</div>

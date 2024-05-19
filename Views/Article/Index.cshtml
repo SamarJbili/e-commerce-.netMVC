@@ -1,0 +1,40 @@
+﻿@model IEnumerable<e_commerce.Models.Article>
+
+@{
+    ViewData["Title"] = "Liste des articles";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col">
+            <h1>Liste des articles</h1>
+        </div>
+        <div class="col text-right">
+            <a class="btn btn-primary" asp-action="Create">Create New</a>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        @foreach (var article in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="~/images/@(article.ImagePath ?? "noimage.jpg")" class="card-img-top" alt="Article Image">
+                    <div class="card-body">
+                        <h5 class="card-title">@article.name</h5>
+                        <p class="card-text">@article.Description</p>
+                        <p class="card-text">Prix: @article.Prix</p>
+                        <p class="card-text">Categorie: @article.Categorie.Nom</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="text-center">
+                            <a asp-action="Details" asp-route-id="@article.Id" class="btn btn-primary mr-2">View</a>
+                            <a asp-action="Edit" asp-route-id="@article.Id" class="btn btn-secondary mr-2">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@article.Id" class="btn btn-danger">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
